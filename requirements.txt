@@ -1,0 +1,8 @@
+PyYAML==6.0.2
+oracledb==2.4.1
+pandas==2.2.2
+numpy==2.0.2
+dbfread==2.0.7
+python-dateutil==2.9.0.post0
+bitstring==4.2.3  # add
+pypxlib==0.7.0

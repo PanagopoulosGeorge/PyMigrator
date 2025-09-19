@@ -1,0 +1,25 @@
+[project]
+name = "pymigrator"
+version = "0.1.0"
+description = "Config-driven migration from DBF/Sybase to Oracle"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{ name = "George Panagopoulos" }]
+dependencies = [
+  "PyYAML==6.0.2",
+  "oracledb==2.4.1",
+  "pandas==2.2.2",
+  "numpy==2.0.2",
+  "dbfread==2.0.7",
+  "python-dateutil==2.9.0.post0",
+  "bitstring==4.2.3",
+  "pypxlib==0.7.0"
+]
+
+[project.scripts]
+pymigrator = "migrator.cli:main"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
