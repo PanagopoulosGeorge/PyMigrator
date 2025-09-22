@@ -42,7 +42,11 @@ class OracleLoader:
 			pass
 
 	def create_table(self, ddl: str):
-		self.exec(ddl)
+		with self._connect() as conn:
+			with conn.cursor() as cur:
+				cur.execute("ALTER SESSION SET NLS_LENGTH_SEMANTICS=CHAR")
+				cur.execute(ddl)
+			conn.commit()
 
 	def truncate_table(self, schema: str, table: str):
 		schema = clean_table_or_field_name(schema)
