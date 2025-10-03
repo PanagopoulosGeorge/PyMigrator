@@ -80,20 +80,19 @@ class OracleLoader:
 		return rows_read, rows_inserted
 
 def convert_value(v):
-    # Treat NaT/NaN as NULL
     if v is pd.NaT or pd.isna(v):
         return None
     if isinstance(v, str) and v.strip() == "":
         return None
-
-	# Handle numpy datetime64
     if isinstance(v, (np.datetime64,)):
         return pd.to_datetime(v).to_pydatetime()
-
-    # Handle pandas Timestamps
     if isinstance(v, pd.Timestamp):
         return v.to_pydatetime()
-		
+    if isinstance(v, (bytes, bytearray)):
+        try:
+            return bytes(v).decode('cp737')  # align with connectors
+        except UnicodeDecodeError:
+            return bytes(v).decode('cp1253', errors='replace')
     return str(v)
 
 
